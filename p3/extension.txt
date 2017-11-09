@@ -1,0 +1,27 @@
+This extension uses the double hash program as a base, with an added SDL
+display. This allows us to visualise how the hash table fills up, including 
+when resizing occurs. This can help us to evaluate how well a hash function
+is distributing words over the hash table, as we should be able to see where
+entries clump together.
+
+The program takes one input text file, with a list of words to fill the hash
+table with. The program can be exited at any point by pressing a key, mouse 
+button, or closing the SDL window. To adjust the speed, the DELAYMS definition
+in dhash.h can be changed. The default of 1ms works well for input files with a
+few thousand entries (such as the 34words.txt file).
+
+The hash table is fit into the SDL window which has a width of 800 pixels. As
+an example, a hash table of size 8000 would fit 10 cells per pixel. The colour
+intensity of the pixel is determined by how many of the cells in the position
+of that pixel are filled with a word. For the example table of size 8000, if 
+the line on the far left (pixel 1 of 800) is black, then all of the 10 hash 
+table values from 0-9 are empty. If it is bright red, then all of the 10 hash
+table values from 0-9 are filled. When the table is resized the hash table 
+visualisation is reset to black, to indicate a new empty hash table has been 
+created.
+
+The blue bar at the bottom shows how full the array is. When the bar reaches 
+the end, the table has reached the maximum load capacity of 60%, so the table 
+will resize. When all words have been added to the hash table the bar will turn
+green to indicate the program has finished, then wait for the user to close the 
+program.
